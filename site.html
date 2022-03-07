@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invasion News Network</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'League Gothic', sans-serif;
+            scrollbar-width: auto;
+            scrollbar-color: #b5b5b5 #ededed;
+        }
+
+          *::-webkit-scrollbar {
+              width: 10px;
+          }
+
+          *::-webkit-scrollbar-track {
+            background: #ededed;
+          }
+
+          *::-webkit-scrollbar-thumb {
+            background-color: #b5b5b5;
+            border-radius: 1px;
+            border: 3px none #ffffff;
+          }
+
+        body {
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .header {
+            padding: 5px;
+            top: 0;
+            background-color: #ed4040;
+            z-index: 5;
+        }
+
+        .logo {
+            font-size: 100px;
+            padding-left: 10px;
+            position: relative;
+            border-bottom: 1px solid lightgray;
+        }
+
+        h1 {
+            font-size: 50px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 35px;
+        }
+
+        .live-header {
+            height: 65px;
+            border-bottom-left-radius: 1px;
+            border-top-left-radius: 1px;
+            width: 350px;
+            background: #fafafa;
+            display: inline-block;
+            float: right;
+            clear: both;
+            border: 1px solid lightgrey;
+            border-bottom: 1px solid lightgrey;
+            border-right: 0;
+            border-left: 4px solid #b32020;
+            border-top: 0px;
+        }
+
+        a {
+            all: unset;
+            cursor: pointer;
+        }
+
+        .live {
+            display: inline-block;
+            background: #fafafa;
+            height: 100%;
+            width: 350px;
+            float: right;
+            position: relative;
+            clear: both;
+            margin: 0;
+            border-left: 1px solid lightgrey;
+        }
+
+        .live-news {
+            font-size: 30px;
+            padding-bottom: 1%;
+            border-bottom: 2px solid black;
+            display: block;
+            width: auto;
+            text-decoration: underline;
+            text-decoration-color: #b32020;
+            text-decoration-thickness: 2px;
+            padding-left: 5px;
+            transition: 0.5s;
+        }
+
+        .live-news:hover {
+            background-color: #eee;
+        }
+
+        .main-article-title-container {
+
+        }
+
+        .main-article-title {
+            display: inline-grid;
+            position: relative;
+            font-size: 65px;
+            padding-left: 10px;
+            width: calc(100% - 362px);
+            clear: both;
+            background-color: #f7f7f7;
+            transition: 0.5s;
+            border: 1px solid lightgrey;
+        }
+
+        .main-article-title:hover {
+            background-color: #fff;
+            text-shadow: 2px 2px 2px lightgray;
+            box-shadow: 5px 5px 5px lightgray;
+        }
+
+        .main-article-image {
+            pointer-events: none;
+            user-select: none;
+            position: absolute;
+            background-color: #eee;
+            display: inline-block;
+            overflow: hidden;
+            object-position: top;
+            object-fit: cover;
+            height: auto;
+            max-height: 375px;
+            width: 920px;
+            z-index: -1;
+            text-align: center;
+            font-size: 200px;
+        }
+
+        .flexbox-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        div.gallery {
+          margin: 5px;
+          border: 1px solid lightgray;
+          float: left;
+          width: 400px;
+            transition: 0.5s;
+        }
+
+        div.gallery img {
+          width: 400px;
+          height: 250px;
+            object-fit: cover;
+        }
+
+        div.desc {
+          padding-left: 5px;
+            font-size: 40px;
+            border-left: 4px solid #3260a8;
+        }
+
+        .gallery:hover {
+            background-color: #fff;
+            text-shadow: 2px 2px 2px lightgray;
+            box-shadow: 5px 5px 5px lightgray;
+        }
+
+        ::selection {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div style="position: sticky;" class="header">
+
+</div>
+
+<div>
+<p class="logo">Invasion News Network</p>
+</div>
