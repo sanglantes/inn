@@ -4,18 +4,18 @@ from http.server import *
 import feedparser
 from datetime import date
 
-f = open('site.html', 'r')
+f = open('site.html', 'r')  # Import site.html
 html = f.read()
-host = "localhost"
-port = 1337
+host = "localhost"  # Host at 127.0.0.1
+port = 1337  # Custom port
 
 
 class Server(BaseHTTPRequestHandler):
     def do_GET(self):
-        self.send_response(200)
+        self.send_response(200)  # Send OK header.
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-        self.wfile.write(bytes(f'{html}', 'utf-8'))
+        self.wfile.write(bytes(f'{html}', 'utf-8'))  # Read site.html
 
         self.wfile.write(bytes(
             f'''
@@ -27,16 +27,16 @@ class Server(BaseHTTPRequestHandler):
         self.wfile.write(bytes('''
         <div class="live-header">
             <p style="position: relative; color: #b32020; left: 10px; top: 10px;">
-                <b>LIVE • </b><span style="color:black;"> Recent news updates</span>
+                <b>LIVE • </b><span style="color:black;"> Recent news updates</span> 
             </p>
-        </div>''', 'utf-8'))
+        </div>''', 'utf-8'))  # Live header
 
         self.wfile.write(bytes(f'''
         <div class="live">
             <a href="{entries[f].link}">
                 <span class="live-news">{entries[f].title}</span>
             </a>
-        </div>''', 'utf-8'))
+        </div>''', 'utf-8'))  # BBC RSS live news
 
         self.wfile.write(bytes(
             f'''<div class="live">
@@ -71,7 +71,7 @@ class Server(BaseHTTPRequestHandler):
         <a href<div class="main-article-title-container">
             <a href="{headline_url(0)}"><div class="main-article-title">{headline(0)}</div></a>
         </div>''', 'utf-8'))
-
+        #  API sub news
         self.wfile.write(bytes(f'''
         <div class="flexbox-container">
             <div class="gallery">
@@ -94,31 +94,35 @@ class Server(BaseHTTPRequestHandler):
 
 
 # API
-response = requests.get(f'https://newsapi.org/v2/everything?q=invasion AND (Ukraine OR Russia)&from={date.today()}&sortBy=popularity&apiKey=cad6e5d9560248eba80f70befa340eda')
-data = response.json()
-articles = data["articles"]
-results = [arr["title"] for arr in articles]
-results_images = [arr["urlToImage"] for arr in articles]
-results_url = [arr["url"] for arr in articles]
+response = requests.get(
+    f'https://newsapi.org/v2/everything?q=Ukraine AND Russia&from={date.today()}&sortBy=popularity&apiKey=cad6e5d9560248eba80f70befa340eda')
+data = response.json()  # Parse JSON
+articles = data["articles"]  # Select 'articles' values
+results = [arr["title"] for arr in articles]  # From 'articles' select 'title'
+results_images = [arr["urlToImage"] for arr in articles]  # From 'articles' select 'urlToImage'
+results_url = [arr["url"] for arr in articles]  # From 'articles' select 'url'
 
-def headline(x):
+
+def headline(x):  # Generate four headlines
     for i, arr in enumerate(results, x):
         if i > 3:
             return arr
 
-def headline_image(x):
+
+def headline_image(x):  # Generate corresponding images for the four headlines
     for i, arr in enumerate(results_images, x):
         if i > 3:
             return arr
 
-def headline_url(x):
+
+def headline_url(x):  # Generate corresponding URLs for the four headlines
     for i, arr in enumerate(results_url, x):
         if i > 3:
             return arr
 
 
 #  RSS
-newsfeed = feedparser.parse('https://feeds.bbci.co.uk/news/rss.xml?edition=int')
+newsfeed = feedparser.parse('https://feeds.bbci.co.uk/news/rss.xml?edition=int')  # Define feed
 entries = newsfeed.entries
 i = 0
 while 'Ukraine' and 'Russia' not in entries[i].title:
@@ -140,7 +144,6 @@ k = h + 1
 while 'Ukraine' and 'Russia' not in entries[k].title:
     k = k + 1
 
-#  ^ THIS IS NOT ACCEPTABLE. USE RESTful API OR AUTOMATE THE PROCESS.
 if __name__ == '__main__':
     webServer = HTTPServer((host, port,), Server)
     print(f'Server is hosting at {host}')
