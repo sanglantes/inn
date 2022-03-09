@@ -62,6 +62,14 @@ class Server(BaseHTTPRequestHandler):
             </div>''',
             'utf-8'))
 
+        self.wfile.write(bytes(
+            f'''<div class="live">
+                        <a href="{entries[l].link}">
+                            <span class="live-news">{entries[l].title}</span>
+                        </a>
+                    </div>''',
+            'utf-8'))
+
         self.wfile.write(bytes(f'''
         <div class="main-article-container">
             <img class="main-article-image" src="{headline_image(0)}">
@@ -143,6 +151,10 @@ while 'Ukraine' and 'Russia' not in entries[h].title:
 k = h + 1
 while 'Ukraine' and 'Russia' not in entries[k].title:
     k = k + 1
+
+l = k + 1
+while 'Ukraine' and 'Russia' not in entries[l].title:
+    l = l + 1
 
 if __name__ == '__main__':
     webServer = HTTPServer((host, port,), Server)
