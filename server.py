@@ -100,7 +100,7 @@ class Server(BaseHTTPRequestHandler):
         </div>''', 'utf-8'))
         self.wfile.write(bytes('</body></html>', 'utf-8'))
 
-
+# API
 # API
 response = requests.get(
     f'https://newsapi.org/v2/everything?q=Ukraine AND Russia&from={date.today()}&sortBy=popularity&apiKey=cad6e5d9560248eba80f70befa340eda')
